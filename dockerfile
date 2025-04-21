@@ -1,5 +1,16 @@
 FROM node:12-alpine
-WORKDIR /app
-COPY . .
+
+#intalling git:
+RUN apk add --no-cache git
+
+#clone the repo : 
+RUN git clone -q https://github.com/drissalichane/todo-app.git
+
+#set the working directory to the app directory
+WORKDIR /todo-app
+
+#Install dependencie
 RUN yarn install --production
-CMD ["node", "/app/src/index.js"]
+
+#start the application 
+CMD ["node", "src/index.js"]
